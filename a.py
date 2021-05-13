@@ -1,26 +1,12 @@
-import bs4 as bs
-import requests
 
-def get_sp500_weights():
+sp500 = {'lll': '3', 'kkkk':'4', '888':'2'}
+forcast = {'lll': 3, 'kkkk': 4, '888':2}
+newDict = {}
 
-    # get data from website, parse with beautiful soup
-    url = 'https://www.slickcharts.com/sp500'
-    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0'}
-    resp = requests.get(url, headers=headers)
-    soup = bs.BeautifulSoup(resp.text, features="lxml")
-    print(soup)
-
-    table = soup.find('table', {'<class': 'table table-hover table-borderless table-sm>'})
-    print(table)
-    sp500_weights = []
-    for row in table.findAll('tr')[1:]:
-        sp500_weight = row.findAll('td')[3].text
-        sp500_weights.append(sp500_weight)
-    print(sp500_weights)
-    return sp500_weights
-
-get_sp500_weights()
-
-
-
-
+for keys in sp500:
+    newDict[keys] = forcast[keys] * int(sp500[keys]) / 100
+print(newDict)
+for keys in sp500:
+    newDict[keys] = int(float(conv_percentage(forcast[keys]))) * int(float(sp500[keys])) / 100
+    print(newDict)
+    if keys == 'NWS':
